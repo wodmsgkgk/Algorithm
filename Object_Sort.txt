@@ -1,0 +1,53 @@
+package coding;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class Test {
+	public static void main(String[] args) {
+		// 테스트용 데이터
+		ArrayList<Mountain> boardList = new ArrayList<Mountain>();
+		boardList.add(new Mountain(0, 0));
+		boardList.add(new Mountain(1, 6));
+		boardList.add(new Mountain(2, 7));
+		boardList.add(new Mountain(3, 5));
+		boardList.add(new Mountain(4, 0));
+		boardList.add(new Mountain(5, 8));
+		boardList.add(new Mountain(6, 1));
+		boardList.add(new Mountain(7, 0));
+
+		DescendingObj descending = new DescendingObj();
+		Collections.sort(boardList, descending);
+
+		//결과 출력
+		for (Mountain mountain : boardList) {
+			System.out.println("index : " + mountain.getIndex() + ", height : " + mountain.getHeight());
+		}
+	}
+}
+
+class DescendingObj implements Comparator<Mountain> {
+	@Override
+	public int compare(Mountain o1, Mountain o2) {
+		// Integer 오름차순
+		return o2.getHeight().compareTo(o1.getHeight());
+		// Integer 내림차순
+//		return o1.getHeight().compareTo(o2.getHeight());
+	}
+}
+
+// 이번에는 저장될 객체가 Comparable 인터페이스를 구현하지 않습니다.
+class Mountain {
+	private Integer index;
+	private Integer height;
+
+	public Mountain(int num, int name) {
+		this.index = num;
+		this.height = name;
+	}
+	public void setIndex(int num) {this.index = num;}
+	public Integer getIndex() {return this.index;}
+	public void setHeight(int height) {this.height = height;}
+	public Integer getHeight() {return this.height;}
+}
