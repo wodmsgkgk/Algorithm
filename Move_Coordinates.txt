@@ -1,0 +1,95 @@
+package coding;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Test {
+	public static void main(String[] args) {
+		// 테스트용 데이터
+        Scanner in = new Scanner(System.in);
+        int lightX = in.nextInt(); // the X position of the light of power
+        int lightY = in.nextInt(); // the Y position of the light of power
+        int initialTX = in.nextInt(); // Thor's starting X position
+        int initialTY = in.nextInt(); // Thor's starting Y position
+        int dX = lightX - initialTX;
+        int dY = lightY - initialTY;
+        int min = min(dX,dY);
+        int diff = diff(dX,dY);
+        String MAX = "";
+        ArrayList<String> resultArray = new ArrayList<String>();
+		System.err.println("dX : " + dX+", dY : " + dY+", min : " + min+", diff : " + diff);
+
+
+        if(dX>0 && dY>0) {
+        	if(min == dX)MAX = "N";
+        	else		 MAX = "E";
+        	for (int i = 0; i < Math.abs(min); i++) {
+        		resultArray.add("SE");
+			}
+        	for (int i = 0; i < diff; i++) {
+        		resultArray.add(MAX);
+			}
+        }else if(dX>0 && dY==0) {
+        	for (int i = 0; i < dX; i++) {
+        		resultArray.add("E");
+        	}
+        }else if(dX>0 && dY<0) {
+        	if(min == dX)MAX = "S";
+        	else		 MAX = "E";
+        	for (int i = 0; i < Math.abs(min); i++) {
+        		resultArray.add("NE");
+			}
+        	for (int i = 0; i < diff; i++) {
+        		resultArray.add(MAX);
+			}
+        }else if(dX==0 && dY>0) {
+        	for (int i = 0; i < dY; i++) {
+        		resultArray.add("N");
+        	}
+        }else if(dX==0 && dY<0) {
+        	for (int i = 0; i < Math.abs(dY); i++) {
+        		resultArray.add("S");
+        	}
+        }else if(dX<0 && dY>0) {
+        	if(min == dX)MAX = "N";
+        	else		 MAX = "W";
+        	for (int i = 0; i < Math.abs(min); i++) {
+        		resultArray.add("SW");
+			}
+        	for (int i = 0; i < diff; i++) {
+        		resultArray.add(MAX);
+			}
+        }else if(dX<0 && dY==0) {
+        	for (int i = 0; i < Math.abs(dX); i++) {
+        		resultArray.add("W");
+        	}
+        }else if(dX<0 && dY<0) {
+        	if(min == dX)MAX = "S";
+        	else		 MAX = "W";
+        	for (int i = 0; i < Math.abs(min); i++) {
+        		resultArray.add("NW");
+			}
+        	for (int i = 0; i < diff; i++) {
+        		resultArray.add(MAX);
+			}
+        }
+        long seed = System.nanoTime();
+        Collections.shuffle(resultArray, new Random(seed));
+        int turn = 0;
+        // game loop
+        while (true) {
+            if(turn<resultArray.size())System.out.println(resultArray.get(turn++));
+            else break;
+        }
+	}
+	
+	public static int min(int a, int b) {
+		return (Math.abs(a)>Math.abs(b))?b:a;
+	}
+	
+	public static int diff(int a, int b) {
+		return Math.abs(Math.abs(a)-Math.abs(b));
+	}
+}
