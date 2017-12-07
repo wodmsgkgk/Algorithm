@@ -1,0 +1,29 @@
+package coding;
+
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class Test {
+	public static void main(String args[]) {
+		Scanner in = new Scanner(System.in);
+		BigInteger N = in.nextBigInteger();
+		BigInteger m = N.mod(new BigInteger("10"));
+		BigInteger h = N.mod(BigInteger.valueOf(100));
+		int a = m.intValue();
+		int b = h.intValue();
+		if (b > 10 && b < 20) {
+			System.out.println(N + "th");
+		} else {
+			if (a == 1) {
+				System.out.println(N + "st");
+			} else if (a == 2) {
+				System.out.println(N + "nd");
+			} else if (a == 3) {
+				System.out.println(N + "rd");
+			} else {
+				System.out.println(N + "th");
+			}
+		}
+	}
+}
+
