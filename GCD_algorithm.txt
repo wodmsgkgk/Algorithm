@@ -1,0 +1,24 @@
+package coding;
+
+import java.util.Scanner;
+
+public class Test {
+	public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        String FRACTION = in.nextLine();
+        String[] f = FRACTION.split(" / ");
+        int a = Integer.parseInt(f[0]);
+        int b = Integer.parseInt(f[1]);
+        
+        if(b==0) System.out.println("INVALID");
+        else {
+        	int g = gcd(a,b);
+        	System.out.println(a/g+" / "+b/g);
+        }
+	}
+	 public static int gcd(int p, int q){
+		if (q == 0) return p;
+		return gcd(q, p%q);
+	 }
+}
+
