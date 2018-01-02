@@ -1,0 +1,33 @@
+package coding;
+
+import java.util.Scanner;
+
+public class Test {
+	public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+
+        System.out.println(GetDigit(n));
+	}
+
+	static int GetDigit(int n) {
+		int s = 9;
+		int t = 0;
+		n--;
+		for (int k = 1;; k++) {
+			if (n >= s * k) {
+				n -= s * k;
+				t += s;
+				s *= 10;
+				continue;
+			}
+			t += n / k + 1;
+			k -= n % k + 1;
+
+			for (; k>0; t /= 10, k--);
+			return t % 10;
+		}
+	}
+
+}
+
